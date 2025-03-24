@@ -1,0 +1,50 @@
+{
+	"name": "white-token",
+	"version": "1.0.0",
+	"description": "WhiteToken ERC20 implementation with Hardhat and viem tooling",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"contract:compile": "npx hardhat compile",
+		"contract:test": "npx hardhat test",
+		"contract:deploy": "npx hardhat ignition deploy ./ignition/modules/WhiteToken.ts --network localhost",
+		"contract:deploy:mainnet": "npx hardhat ignition deploy ./ignition/modules/WhiteToken.ts --network mainnet",
+		"contract:deploy:sepolia": "npx hardhat ignition deploy ./ignition/modules/WhiteToken.ts --network sepolia",
+		"blockchain:node": "npx hardhat node",
+		"coverage": "npx hardhat coverage"
+	},
+	"devDependencies": {
+		"@nomicfoundation/hardhat-ignition": "^0.15.0",
+		"@nomicfoundation/hardhat-ignition-viem": "^0.15.0",
+		"@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+		"@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+		"@nomicfoundation/hardhat-verify": "^2.0.0",
+		"@nomicfoundation/hardhat-viem": "^2.0.0",
+		"@types/chai": "^4.2.0",
+		"@types/chai-as-promised": "^7.1.6",
+		"@types/mocha": ">=9.1.0",
+		"@types/node": ">=18.0.0",
+		"@types/react": "19.0.12",
+		"autoprefixer": "10.4.14",
+		"chai": "^4.2.0",
+		"dotenv": "^16.4.7",
+		"hardhat": "^2.22.19",
+		"hardhat-gas-reporter": "^1.0.8",
+		"postcss": "8.4.23",
+		"solidity-coverage": "^0.8.0",
+		"tailwindcss": "3.3.0",
+		"ts-node": ">=8.0.0",
+		"typescript": "~5.0.4",
+		"viem": "^2.7.6"
+	},
+	"dependencies": {
+		"@openzeppelin/contracts": "^5.2.0",
+		"next": "^15.2.3",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"author": "Oleksii Yudin",
+	"license": "MIT"
+}
