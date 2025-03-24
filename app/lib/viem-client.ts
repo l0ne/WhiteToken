@@ -1,5 +1,5 @@
 import { createPublicClient, createWalletClient, http, parseAbi, Address, encodeFunctionData } from 'viem'
-import { hardhat, sepolia, mainnet } from 'viem/chains'
+import { hardhat, sepolia } from 'viem/chains'
 import * as dotenv from 'dotenv';
 // Load environment variables from .env file
 dotenv.config();

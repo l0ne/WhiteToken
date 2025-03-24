@@ -9,8 +9,8 @@ import useTokenData from './hooks/useTokenData'
 import ErrorAlert from './ui/ErrorAlert'
 import ConnectButton from './ui/ConnectButton'
 import LoadingSkeleton from './ui/LoadingSkeleton'
-import ContractInfo from './ui/ContractInfo'
 import TokenInfoContent from './TokenInfoContent'
+import { NetworkType } from '../lib/viem-client'
 
 const TokenInfo = () => {
   const { 
@@ -50,7 +50,7 @@ const TokenInfo = () => {
             {Object.keys(networks).map((network) => (
               <button
                 key={network}
-                onClick={() => setSelectedNetwork(network as any)}
+                onClick={() => setSelectedNetwork(network as NetworkType)}
                 className={`px-3 py-1 rounded-md text-xs font-medium transition-colors 
                   ${selectedNetwork === network 
                     ? 'bg-white text-blue-600' 

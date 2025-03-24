@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { formatEther, Address, isAddress, parseEther, formatUnits } from 'viem'
+import { Address, isAddress, parseEther, formatUnits } from 'viem'
 import { 
   publicClient,
   tokenAbi, 
@@ -12,7 +12,6 @@ import {
   NetworkType,
   DEFAULT_NETWORK,
   createClient,
-  getNetworkConfig,
   NETWORK_CONFIGS
 } from '../../lib/viem-client'
 
@@ -98,7 +97,7 @@ export const useTokenData = () => {
         // Update custom decimals to match contract
         setCustomDecimals(decimals);
       } catch (err) {
-        console.warn('Could not get decimals from contract, using custom value:', customDecimals);
+        console.warn('Could not get decimals from contract, using custom value:', err);
         decimals = customDecimals;
       }
 
@@ -111,7 +110,7 @@ export const useTokenData = () => {
       const formattedSupply = formatUnits(supply as bigint, decimals)
 
       // Set user address and balance
-      let userAddr = ''
+      let userAddr: string = ''
       let balance = 'N/A'
 
       if (address) {
@@ -125,12 +124,12 @@ export const useTokenData = () => {
         balance = formatUnits(rawBalance as bigint, decimals)
       } else {
         // Try to get connected account
-        const accounts = await window.ethereum?.request({ 
+        const accounts = await window.ethereum?.request({
           method: 'eth_accounts' 
-        }).catch(() => [])
+        }).catch(() => []) as unknown[]
         
         if (accounts && accounts.length > 0) {
-          userAddr = accounts[0]
+          userAddr = accounts[0] as string
           
           const rawBalance = await client.publicClient.readContract({
             address: tokenAddress,
@@ -187,7 +186,7 @@ export const useTokenData = () => {
           // Update custom decimals to match contract
           setCustomDecimals(decimals);
         } catch (err) {
-          console.warn('Could not get decimals from contract, using custom value:', customDecimals);
+          console.warn('Could not get decimals from contract, using custom value:', err);
           decimals = customDecimals;
         }
         
@@ -228,11 +227,11 @@ export const useTokenData = () => {
       }
       
       // Use non-null assertion since we've checked for existence
-      window.ethereum!.on('accountsChanged', handleAccountsChanged)
+      window.ethereum!.on('accountsChanged', handleAccountsChanged as (...args: unknown[]) => void)
       
       // Clean up the event listener when component unmounts
       return () => {
-        window.ethereum!.removeListener('accountsChanged', handleAccountsChanged)
+        window.ethereum!.removeListener('accountsChanged', handleAccountsChanged as (...args: unknown[]) => void)
       }
     }
   }, [customTokenAddress, client.publicClient, customDecimals])
@@ -245,7 +244,7 @@ export const useTokenData = () => {
 
     try {
       setError(null)
-      const accounts = await window.ethereum!.request({ method: 'eth_requestAccounts' })
+      const accounts = <string[]> await window.ethereum!.request({ method: 'eth_requestAccounts' })
       setTokenData(prev => ({ ...prev, userAddress: accounts[0] }))
       fetchTokenData(accounts[0], customTokenAddress as Address)
     } catch (err) {
@@ -325,7 +324,7 @@ export const useTokenData = () => {
         isSuccess: true,
         isError: false,
         errorMessage: '',
-        hash
+        hash: hash as string
       })
       
       // Refresh token data after transfer
@@ -384,7 +383,7 @@ export const useTokenData = () => {
         isSuccess: true,
         isError: false,
         errorMessage: '',
-        hash
+        hash: hash as string
       })
       
     } catch (err) {
@@ -438,7 +437,7 @@ export const useTokenData = () => {
         isSuccess: true,
         isError: false,
         errorMessage: '',
-        hash
+        hash: hash as string
       })
       
       // Refresh token data after transfer

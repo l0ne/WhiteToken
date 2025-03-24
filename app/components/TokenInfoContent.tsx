@@ -30,7 +30,6 @@ export const TokenInfoContent = ({
   inputTokenAddress,
   setInputTokenAddress,
   updateTokenAddress,
-  transferTokens,
   transferFromTokens,
   approveSpender,
   transferStatus,
