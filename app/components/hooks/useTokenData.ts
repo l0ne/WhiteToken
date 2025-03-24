@@ -176,7 +176,7 @@ export const useTokenData = () => {
         }) as string
         
         // Try to get decimals, but use custom value if it fails
-        let decimals;
+        let decimals: number;
         try {
           decimals = await client.publicClient.readContract({
             address: customTokenAddress as Address,
