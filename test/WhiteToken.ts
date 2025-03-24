@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { expect } from "chai";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { parseEther, getAddress } from "viem";
